@@ -26,11 +26,10 @@ export class CommentController {
   async getAll() {
     return this.commentService.getAllComment();
   }
-
   @ApiOperation({ summary: "Получение отзывов по статусу" })
   @ApiResponse({ status: 200, type: [Comment] })
   @UseGuards(AuthGuard)
-  @Get(":status")
+  @Get("byStatus/:status")
   async getAllByStatus(@Param("status") status: string) {
     return this.commentService.getAllCommentByStatus(status);
   }
