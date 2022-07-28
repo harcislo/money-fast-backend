@@ -80,6 +80,11 @@ export class ApplicationController {
     );
   }
 
+  @ApiOperation({
+    summary:
+      "Отмена заявки(только пользователям, создавшим заявку, проверяю по cookie)",
+  })
+  @ApiResponse({ status: 200, type: [Application] })
   @Get("cancel/:id")
   async cancelApplication(@Req() request, @Param("id") id: number) {
     if (request.cookies["applicationsId"]) {
