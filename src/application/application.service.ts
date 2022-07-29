@@ -43,14 +43,20 @@ export class ApplicationService {
     let application = await this.applicationRepository.findOne({
       where: { id },
     });
-    application = await application.update({ status: status });
+    application.set({
+      status: status,
+    });
+    application = await application.save();
     return application;
   }
   async cancelApplication(id: number) {
     let application = await this.applicationRepository.findOne({
       where: { id },
     });
-    application = await application.update({ status: "rejected" });
+    application.set({
+      status: "rejected",
+    });
+    application = await application.save();
     return application;
   }
 }

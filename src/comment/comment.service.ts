@@ -21,7 +21,10 @@ export class CommentService {
 
   async updateStatusComment(id: number, status: string) {
     let comment = await this.commentRepository.findOne({ where: { id } });
-    comment = await comment.update({ status });
+    comment.set({
+      status: status,
+    });
+    comment = await comment.save();
     return comment;
   }
 
