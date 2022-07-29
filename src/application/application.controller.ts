@@ -53,10 +53,7 @@ export class ApplicationController {
   @ApiResponse({ status: 200, type: [Application] })
   @Get()
   async getAll(@Query("status") status: string) {
-    if (status) {
-      return this.applicationService.getByStatusApplication(status);
-    }
-    return this.applicationService.getApplications();
+    return this.applicationService.getByStatusApplication(status);
   }
 
   @ApiOperation({ summary: "Полчуение заявки по id" })

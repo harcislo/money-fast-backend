@@ -27,9 +27,14 @@ export class ApplicationService {
   }
 
   async getByStatusApplication(status: string) {
-    const applications = await this.applicationRepository.findAll({
-      where: { status: status },
-    });
+    let applications;
+    if (status === "all") {
+      applications = await this.applicationRepository.findAll();
+    } else {
+      applications = await this.applicationRepository.findAll({
+        where: { status: status },
+      });
+    }
 
     return applications;
   }
