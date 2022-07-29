@@ -86,18 +86,19 @@ export class ApplicationController {
   })
   @ApiResponse({ status: 200, type: [Application] })
   @Get("cancel/:id")
-  async cancelApplication(@Req() request, @Param("id") id: number) {
-    if (request.cookies["applicationsId"]) {
-      return JSON.parse(request.cookies["applicationsId"]).find(
-        (el) => String(el) === String(id)
-      )
-        ? await this.applicationService.cancelApplication(id)
-        : new UnauthorizedException({
-            message: "У вас нет прав для отмены этой заявки",
-          });
-    }
-    throw new UnauthorizedException({
-      message: "У вас нет прав для отмены этой заявки",
-    });
+  async cancelApplication(@Req() request, @Param("id") id: string) {
+    // if (request.cookies["applicationsId"]) {
+    //   return JSON.parse(request.cookies["applicationsId"]).find(
+    //     (el) => String(el) === String(id)
+    //   )
+    //     ? await this.applicationService.cancelApplication(Number(id))
+    //     : new UnauthorizedException({
+    //         message: "У вас нет прав для отмены этой заявки",
+    //       });
+    // }
+    // throw new UnauthorizedException({
+    //   message: "У вас нет прав для отмены этой заявки",
+    // });
+    return this.applicationService.cancelApplication(Number(id));
   }
 }
